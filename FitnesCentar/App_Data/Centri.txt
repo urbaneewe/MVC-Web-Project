@@ -1,0 +1,3 @@
+BestFit;Bulevar Cara Lazara 4, Novi Sad, 21000;2012;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;2000;20000;500;400;5000;False
+Classic;Lasla Gala 3, Novi Sad, 21000;2010;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;1600;18000;400;800;4000;True
+Sipka;Geto 3, Ruma, 22400;2005;admin2;admin2;Marica;Saric;ZENSKI;admin2@admin.com;24-04-1958;VLASNIK;1000;10000;100;200;3000;False

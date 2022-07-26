@@ -1,0 +1,288 @@
+﻿@using FitnesCentar.Models
+@{
+    ViewBag.Title = "Home";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@{
+    Korisnik korisnik = (Korisnik)HttpContext.Current.Session["korisnik"];
+    Dictionary<string, FitnessCentar> centri = (Dictionary<string, FitnessCentar>)HttpContext.Current.Application["centri"];
+    Dictionary<string, GrupniTrening> treninzi = (Dictionary<string, GrupniTrening>)HttpContext.Current.Application["treninzi"];
+}
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/flexboxgrid.css" />
+    <link rel="stylesheet" href="~/Content/style.css">
+</head>
+
+
+<body>
+
+    <!-- MENI -->
+    @{
+        if (korisnik == null)
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                            <nav id="navbar">
+                                <ul>
+                                    <li class="active"><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/Login/Index">Prijava</a></li>
+                                    <li><a href="~/Register/Index">Registracija</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+
+        else if (korisnik != null && korisnik.uloga.Equals(Uloga.POSETILAC))
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                            <nav id="navbar">
+                                <ul>
+                                    <li class="active"><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/IstorijaTrening/Index">Istorija treninga</a></li>
+                                    <li><a href="~/Profil/Index">Profil</a></li>
+                                    <li><a href="~/Login/Odjava">Odjava</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+
+        else if (korisnik != null && korisnik.uloga.Equals(Uloga.TRENER))
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <nav id="navbar">
+                                <ul>
+                                    <li class="active"><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/Treninzi/Index">Treninzi</a></li>
+                                    <li><a href="~/Istorija/Index">Prethodni treninzi</a></li>
+                                    <li><a href="~/Trener/Index">Kreriraj trening</a></li>
+                                    <li><a href="~/Profil/Index">Profil</a></li>
+                                    <li><a href="~/Login/Odjava">Odjava</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+
+        else if (korisnik != null && korisnik.uloga.Equals(Uloga.VLASNIK))
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <nav id="navbar">
+                                <ul>
+                                    <li><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/Vlasnik/Index">Registruj trenera</a></li>
+                                    <li class="active"><a href="~/Centri/Index"></a>Centri</li>
+                                    <li><a href="~/Profil/Index">Profil</a></li>
+                                    <li><a href="~/Login/Odjava">Odjava</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+    }
+
+    <!-- MENI -->
+    <!--SLIKA-->
+
+    <section id="showcase">
+        <div class="container">
+            <div class="row center-xs center-sm center-md center-lg middle-sm">
+                <div class="col-xs-12 col-sm-10 col-md-10 col- col-lg-9 showcase-content">
+                    <h1>Pobedite svoje demone</h1>
+                    <p style="color:white; font-size:25px; margin-top:10px">Klikom do pobede</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--SLIKA-->
+    <!--CENTRI KOJIMA JE VLASNIK I BRISANJE-->
+    <h2>Fitnes centri</h2>
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>Godina otvaranja</th>
+            <th>Mesecna clanarina</th>
+            <th>Godisnja clanarina</th>
+            <th>Cena Treninga</th>
+            <th>Cena grupnog treninga</th>
+            <th>Cena Personalnog treninga</th>
+            <th>Status</th>
+
+        </tr>
+        @{
+            foreach (FitnessCentar f in centri.Values)
+            {
+                if (f.vlasnik.username == korisnik.username)
+                {
+                    <tr>
+                        <td>@f.naziv</td>
+                        <td>@f.adresa</td>
+                        <td>@f.godinaOtvaranja</td>
+                        <td>@f.mesecnaClanarina</td>
+                        <td>@f.godisnjaClanarina</td>
+                        <td>@f.cenaTreninga</td>
+                        <td>@f.cenaGrupnogTreninga</td>
+                        <td>@f.cenaPersonalnogTreninga</td>
+                        <td>@f.obrisan</td>
+                        <td>
+                            @if (f.obrisan.Equals(false) && treninzi.Count == 0)
+                            {
+                                <form action="~/Centri/ObrisiCentar" method="post">
+                                    <input type="text" name="naziv" value="@f.naziv" hidden />
+                                    <input type="submit" value="Obrisi centar" />
+                                </form>
+                            }
+                            else if (f.obrisan.Equals(true))
+                            {
+                                <form action="~/Centri/VratiCentar" method="post">
+                                    <input type="text" name="naziv" value="@f.naziv" hidden />
+                                    <input type="submit" value="Vrati centar" />
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+    <br />
+    <!--KREIRAJ CENTAR-->
+    <section id="offers">
+        <div class="container">
+            <div class="row center-xs center-sm center-md center-md">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2>Kreiraj centar</h2>
+                    <div class="row center-xs center-sm center-md center-md">
+                        <form action="~/Centri/KreirajCentar" method="post" style="margin-top:20px; margin-bottom:20px">
+                            <input type="text" name="naziv" placeholder="Naziv" required>
+                            <input type="text" name="adresa" placeholder="Adresa" required>
+                            <br>
+                            <input type="number" name="godinaOtvaranja" placeholder="Godina otvaranja" required>
+                            <input type="number" name="mesecnaClanarina" placeholder="Mesecna clanarina" required>
+                            <br>
+                            <input type="number" name="godisnjaClanarina" placeholder="Godisnja clanarina" required>
+                            <br>
+                            <input type="number" name="cenaTreninga" placeholder="Cena treninga" required>
+                            <br>
+                            <input type="number" name="cenaGrupnogTreninga" placeholder="Cena grupnog treninga" required>
+                            <br>
+                            <input type="number" name="cenaPersonalnogTreninga" placeholder="Cena personalnog treninga" required>
+                            <br>
+                            <input type="submit" value="Kreiraj"
+                                   style="
+                                        color:darkred;
+                                        padding:10px;
+                                        border:0px;
+                                        width:267px;
+                                        height:34px;
+                                        text-align:center;
+                                        margin-bottom:30px;">
+                        </form>
+                    </div>
+                    <h4 style="margin-bottom:20px; color:red">@ViewBag.Error</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br />
+
+    <!--IZMENA CENTARA-->
+    <h2>Fitnes centri</h2>
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>Godina otvaranja</th>
+            <th>Mesecna clanarina</th>
+            <th>Godisnja clanarina</th>
+            <th>Cena Treninga</th>
+            <th>Cena grupnog treninga</th>
+            <th>Cena Personalnog treninga</th>
+            <th>Status</th>
+
+        </tr>
+        @{
+            foreach (FitnessCentar f in centri.Values)
+            {
+                if (f.vlasnik.username == korisnik.username)
+                {
+                    <tr>
+                        <td>@f.naziv</td>
+                        <td>@f.adresa</td>
+                        <td>@f.godinaOtvaranja</td>
+                        <td>@f.mesecnaClanarina</td>
+                        <td>@f.godisnjaClanarina</td>
+                        <td>@f.cenaTreninga</td>
+                        <td>@f.cenaGrupnogTreninga</td>
+                        <td>@f.cenaPersonalnogTreninga</td>
+                        <td>@f.obrisan</td>
+                        <td>
+                            <form action="~/Izmeni/Index" method="post">
+                                <input type="text" name="naziv" value="@f.naziv" hidden />
+                                <input type="submit" value="Izmeni centar" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="container">
+            <div class="row center-xs center-sm center-md center-lg">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p>Copyright &copy; 2022 | SipkaTerapija</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER -->
+
+</body>
+
+</html>

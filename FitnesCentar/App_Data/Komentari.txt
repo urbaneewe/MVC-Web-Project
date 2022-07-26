@@ -1,0 +1,4 @@
+﻿user;user;Jovana;Jovanovic;ZENSKI;user@user.com;25-10-2004;POSETILAC;BestFit;Bulevar Cara Lazara 4, Novi Sad, 21000;2012;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;2000;20000;500;400;5000;False;Odlicne sprave i osoblje;5;True
+marko;marko;Marko;Ljubicic;MUSKI;gym@gym.com;03-12-2002;POSETILAC;Sipka;Geto 3, Ruma, 22400;2005;admin2;admin2;Marica;Saric;ZENSKI;admin2@admin.com;24-04-1958;VLASNIK;1000;10000;100;200;3000;False;Geto terena;3;False
+user;user;Jovana;Jovanovic;ZENSKI;user@user.com;25-10-2004;POSETILAC;BestFit;Bulevar Cara Lazara 4, Novi Sad, 21000;2012;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;2000;20000;500;400;5000;False;Topla preporukica;5;False
+user;user;Jovana;Jovanovic;ZENSKI;user@user.com;25-10-2004;POSETILAC;BestFit;Bulevar Cara Lazara 4, Novi Sad, 21000;2012;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;2000;20000;500;400;5000;False;ok;3;False

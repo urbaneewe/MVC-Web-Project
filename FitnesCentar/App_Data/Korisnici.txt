@@ -1,0 +1,4 @@
+admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK
+admin2;admin2;Marica;Saric;ZENSKI;admin2@admin.com;24-04-1958;VLASNIK
+user;user;Jovana;Jovanovic;ZENSKI;user@user.com;25-10-2004;POSETILAC
+marko;marko;Marko;Ljubicic;MUSKI;gym@gym.com;03-12-2002;POSETILAC

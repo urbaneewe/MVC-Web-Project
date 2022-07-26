@@ -1,0 +1,251 @@
+﻿@using FitnesCentar.Models
+@{
+    ViewBag.Title = "Home";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@{
+    Korisnik korisnik = (Korisnik)HttpContext.Current.Session["korisnik"];
+    FitnessCentar centar = (FitnessCentar)HttpContext.Current.Application["centar"];
+    Dictionary<string, GrupniTrening> treninzi = (Dictionary<string, GrupniTrening>)HttpContext.Current.Application["treninzi"];
+    Dictionary<string, GrupniTrening> istorijaTreninga = (Dictionary<string, GrupniTrening>)HttpContext.Current.Application["istorija"];
+}
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/flexboxgrid.css" />
+    <link rel="stylesheet" href="~/Content/style.css">
+</head>
+
+
+<body>
+
+    <!-- MENI -->
+    @{
+        if (korisnik == null)
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                            <nav id="navbar">
+                                <ul>
+                                    <li class="active"><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/Login/Index">Prijava</a></li>
+                                    <li><a href="~/Register/Index">Registracija</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+
+        else if (korisnik != null && korisnik.uloga.Equals(Uloga.POSETILAC))
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                            <nav id="navbar">
+                                <ul>
+                                    <li><a href="~/Home/Index">Home</a></li>
+                                    <li class="active"><a href="~/IstorijaTrening/Index">Istorija treninga</a></li>
+                                    <li><a href="~/Profil/Index">Profil</a></li>
+                                    <li><a href="~/Login/Odjava">Odjava</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+
+        else if (korisnik != null && korisnik.uloga.Equals(Uloga.TRENER))
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <nav id="navbar">
+                                <ul>
+                                    <li class="active"><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/Treninzi/Index">Treninzi</a></li>
+                                    <li><a href="~/Istorija/Index">Prethodni treninzi</a></li>
+                                    <li><a href="~/Trener/Index">Kreriraj trening</a></li>
+                                    <li><a href="~/Profil/Index">Profil</a></li>
+                                    <li><a href="~/Login/Odjava">Odjava</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+
+        else if (korisnik != null && korisnik.uloga.Equals(Uloga.VLASNIK))
+        {
+            <header id="main-header">
+                <div class="container">
+                    <div class="row center-xs middle-xs middle-sm middle-md middle-lg">
+                        <div class="start-sm start-md start-lg col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                            <h1><span class="primary-text">Sipka</span>Terapija</h1>
+                        </div>
+                        <div class="end-sm end-md end-lg col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <nav id="navbar">
+                                <ul>
+                                    <li class="active"><a href="~/Home/Index">Home</a></li>
+                                    <li><a href="~/Vlasnik/Index">Registruj trenera</a></li>
+                                    <li><a href="~/Centri/Index"></a>Centri</li>
+                                    <li><a href="~/Profil/Index">Profil</a></li>
+                                    <li><a href="~/Login/Odjava">Odjava</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+    }
+
+    <!-- MENI -->
+    <!--SLIKA-->
+
+    <section id="showcase">
+        <div class="container">
+            <div class="row center-xs center-sm center-md center-lg middle-sm">
+                <div class="col-xs-12 col-sm-10 col-md-10 col- col-lg-9 showcase-content">
+                    <h1>Pobedite svoje demone</h1>
+                    <p style="color:white; font-size:25px; margin-top:10px">Klikom do pobede</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--SLIKA-->
+    <!--ISTORIJA TRENINGA-->
+    <h2>Istorija treninga na kojima ste bili</h2>
+    <table>
+        <tr>
+            <th>Naziv treninga</th>
+            <th>Tip treninga</th>
+            <th>Naziv centra</th>
+            <th>Trajanje u minutima</th>
+            <th>Datum treninga</th>
+            <th>Max posetilaca</th>
+        </tr>
+        @{
+            foreach (GrupniTrening g in istorijaTreninga.Values)
+            {
+
+                if (g.korisnici.ContainsKey(korisnik.username))
+                {
+                    <tr>
+                        <td>@g.naziv</td>
+                        <td>@g.tipTreninga</td>
+                        <td>@g.fitnesCentar.naziv</td>
+                        <td>@g.trajanjeTreninga</td>
+                        <td>@g.datumTreninga</td>
+                        <td>@g.maxPosetilaca</td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+
+    <!--PRETRAGA-->
+    <form action="~/IstorijaTrening/Pretraga" method="post">
+
+        <h2 style="margin-top: 15px">Pretraga treninga</h2>
+        <div>
+            <div>
+                <h4>Naziv Centra</h4>
+                <input type="text" placeholder="Unesite ime centra" name="nazivCentra">
+            </div>
+            <div>
+                <h4>Naziv Treninga</h4>
+                <input type="text" placeholder="Unesite ime treninga" name="nazivTreninga">
+            </div>
+            <div>
+                <h4>Tip Treninga</h4>
+                <input list="tip" placeholder="Unesite tip treninga" name="tipTreninga">
+                <datalist id="tip">
+                    @foreach (TipTreninga t in istorijaTreninga.Values.Select(x => x.tipTreninga).Distinct())
+                    {
+                        <option value="@t.ToString()"></option>
+                    }
+                </datalist>
+            </div>
+            <div>
+                <input type="submit" value="Pretrazi"
+                       style="
+                        color:darkred;
+                        padding:10px;
+                        border:0px;
+                        width:267px;
+                        height:35px;
+                        text-align:center;
+                        margin-bottom:30px;">
+            </div>
+        </div>
+    </form>
+
+    <!--SORT-->
+    <form action="~/IstorijaTrening/Sortiranje" method="post">
+        <section id="offers">
+            <div class="container">
+                <div class="row center-xs center-sm center-md center-md">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input list="sort" name="podatakZaSortiranje" placeholder="Odaberite podatak za sortiranje" style="text-align:center" required>
+                        <datalist id="sort">
+                            <option value="Naziv treninga"></option>
+                            <option value="Tip treninga"></option>
+                            <option value="Datum i vreme"></option>
+                        </datalist>
+                        <input list="sortTip" name="tipSortiranja" placeholder="Odaberite nacin sortiranja" style="text-align:center" required>
+                        <datalist id="sortTip">
+                            <option value="Rastuce"></option>
+                            <option value="Opadajuce"></option>
+                        </datalist>
+                        <input type="submit" value="Sortiraj" id="pretraga"
+                               style="
+                               color:darkred;
+                               padding:10px;
+                               border:0px;
+                               width:267px;
+                               height:35px;
+                               text-align:center;
+                               margin-bottom:30px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="container">
+            <div class="row center-xs center-sm center-md center-lg">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p>Copyright &copy; 2022 | SipkaTerapija</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER -->
+
+</body>
+
+</html>

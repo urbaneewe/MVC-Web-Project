@@ -1,0 +1,2 @@
+﻿Tabata;CARDIO;BestFit;Bulevar Cara Lazara 4, Novi Sad, 21000;2012;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;2000;20000;500;400;5000;False;90;21-11-2022 14:30;10
+Istezanje;YOGA;Classic;Lasla Gala 3, Novi Sad, 21000;2010;admin;admin;Mihajlo;Saric;MUSKI;admin@admin.com;21-11-1999;VLASNIK;1600;18000;400;800;4000;False;60;12-12-2022 15:00;30
